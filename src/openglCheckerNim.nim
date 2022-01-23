@@ -94,6 +94,7 @@ proc main() =
     cfg.visible = false
 
     # glv10を指定すると最適な自動設定になる
+    # (CompatibilityProfileContextが設定されたのと同じ)
     # デフォルトがglv10なので無指定でも同じ
     cfg.version = glv10 # glv10 is equal to autoselect.
 
@@ -103,19 +104,19 @@ proc main() =
         #const context = CompatibilityProfileContext
         const context = AutoSelect
         case context:
-            of CoreProfileContext: # over glv32
+            of CoreProfileContext: # >= glv32
                 # [Core Profile Context] glv32以上で指定可能
                 # プログラマブルシェーダーを使うならこっち
                 cfg.forwardCompat = false
                 cfg.profile = opCoreProfile
-            of CoreProfileForwardCompatibleContext: # over glv30
+            of CoreProfileForwardCompatibleContext: # >= glv30
                 # [Core Profile Forward-Compatible Context]
-                # 古い書き方を排除する。趣味で使う分には不要
+                # 古い書き方を排除する。趣味で使う時には falseが良い
                 cfg.forwardCompat = true
-            of CompatibilityProfileContext: # over glv32
+            of CompatibilityProfileContext: # >= glv32
                 # [Compatibility Profile Context]
                 # Old style OpenGL compatible mode
-                # 古い書き方ならこっち
+                # 古い書き方が必要ならこっち
                 # プログラマブルシェーダーも使える
                 cfg.forwardCompat = false
                 cfg.profile = opCompatProfile
