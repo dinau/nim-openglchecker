@@ -2,7 +2,7 @@
 
 Very simple tool for checking OpenGL version.
 
-### Run on Window10
+### Run on Windows10 or later
 
 ```sh
 > openglCheckerNim.exe 
